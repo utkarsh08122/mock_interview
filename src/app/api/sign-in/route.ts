@@ -7,6 +7,7 @@ import { dbConnect } from "@/lib/dbConnect";
 
 export async function POST(req: NextRequest) {
   try {
+   
     const { email, password } = await req.json();
     if (!email || !password) {
       return NextResponse.json(error(406, "All field are required"));
@@ -25,6 +26,7 @@ export async function POST(req: NextRequest) {
       // in tokenData thosedata are store which is incoded in access token and refress token
       const tokenData = {
         id: user._id,
+        name: user.username,
       };
       const RefresToken = generetRefressToken(tokenData);
       const response = NextResponse.json(success(200, "succesful"));
@@ -32,7 +34,7 @@ export async function POST(req: NextRequest) {
         httpOnly: true,
         secure: true,
       });
-      console.log("cooki", response);
+
       return response;
     }
   } catch (e: any) {

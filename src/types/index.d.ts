@@ -54,6 +54,7 @@ interface AgentProps {
   feedbackId?: string;
   type: "generate" | "interview";
   questions?: string[];
+
 }
 
 interface RouteParams {
@@ -95,4 +96,9 @@ interface InterviewFormProps {
 
 interface TechIconProps {
   techStack: string[];
+}
+
+interface cookieProps {
+  name: string;
+  id: string;
 }

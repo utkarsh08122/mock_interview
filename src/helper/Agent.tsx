@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { vapi } from "@/lib/vapi.sdk";
 import { interviewer } from "@/constants";
 import { createFeedback } from "@/lib/action/general.action";
+import { cn } from "@/lib/utils";
+import { vapi } from "@/lib/vapi.sdk";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -95,13 +95,9 @@ const Agent = ({
         transcript: messages,
         feedbackId,
       });
-      console.log(
-        "this si the success and feedback id in agent",
-        success,
-        feedbackId
-      );
 
       if (success && id) {
+        console.log("this is the id", interviewId);
         router.push(`/interview/${interviewId}/feedback`);
       } else {
         console.log("Error saving feedback");
@@ -121,8 +117,9 @@ const Agent = ({
   const handleCall = async () => {
     setCallStatus(CallStatus.CONNECTING);
 
+    // await vapi.start(process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
     if (type === "generate") {
-      console.log(userName, userId);
+      console.log("jbqw");
       await vapi.start("101a8b0f-1c0b-4b10-ad1e-2009ec00eaeb", {
         variableValues: {
           username: userName,
@@ -172,7 +169,7 @@ const Agent = ({
         <div className="card-border">
           <div className="card-content">
             <Image
-              src="/avatar.png"
+              src="/user-avatar.png"
               alt="profile-image"
               width={539}
               height={539}

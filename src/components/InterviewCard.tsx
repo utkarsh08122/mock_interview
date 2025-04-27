@@ -18,14 +18,13 @@ const InterviewCard = ({
   const formattedDate = dayjs(
     feedback?.createdAt || createdAt || Date.now()
   ).format("MMM D,YYYY");
-
   return (
-    <div className="card-border w-[360px] max-sm:w-full min-h-96">
+    <div className="card-border w-[300px] max-sm:w-full min-h-90">
       <div className="card-interview">
         <div>
           {/* Type Badge */}
           <div className="absolute top-0 right-0 w-fit px-4 py-2 rounded-bl-lg bg-light-400">
-            <p className="badge-text ">Tech type</p>
+            <p className="badge-text ">{type}</p>
           </div>
 
           {/* Cover Image */}
@@ -66,7 +65,7 @@ const InterviewCard = ({
         </div>
 
         <div className="flex flex-row justify-between">
-          <DisplayTechIcons techStack={techstack} />
+          <DisplayTechIcons  techStack={techstack} />
 
           <Button className="btn-primary">
             <Link

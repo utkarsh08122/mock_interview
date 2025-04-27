@@ -22,7 +22,7 @@ const interviewSchema = new mongoose.Schema(
         required: true,
       },
     ],
-    userId: [{ type: mongoose.Types.ObjectId, ref: "users" }],
+    userId: { type: mongoose.Types.ObjectId, ref: "users" },
     type: {
       type: String,
       required: true,

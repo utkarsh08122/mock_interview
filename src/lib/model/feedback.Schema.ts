@@ -3,7 +3,11 @@ import mongoose from "mongoose";
 const feedbackSchema = new mongoose.Schema(
   {
     interviewId: { type: mongoose.Types.ObjectId, ref: "interviews" },
-    totalScore: Number,
+    userId: [{ type: mongoose.Types.ObjectId, ref: "users" }],
+    totalScore: {
+      type: Number,
+      required: true,
+    },
     categoryScores: [
       {
         name: String,
@@ -23,7 +27,10 @@ const feedbackSchema = new mongoose.Schema(
         required: true,
       },
     ],
-    finalAssessment: String,
+    finalAssessment: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

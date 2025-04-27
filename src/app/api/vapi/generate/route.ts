@@ -14,10 +14,12 @@ export async function POST(req: NextRequest) {
   const RefresToken = req.cookies.get("RefresToken")?.value || "";
 
   try {
+    // const genAi = new GoogleGenAI({
+    //   apiKey:process.env.GOOGAL_GENERATIVE_AI_API_KEY,
+    // });
     const genAi = new GoogleGenAI({
-      apiKey:process.env.GOOGAL_GENERATIVE_AI_API_KEY,
+      apiKey: "AIzaSyAv_h8RqautKbAlanUroWLllOm2wvk7UKU",
     });
-
     const { text: questions }: any = await genAi.models.generateContent({
       model: "gemini-2.0-flash",
       contents: `Prepare questions for a job interview.
@@ -47,13 +49,10 @@ export async function POST(req: NextRequest) {
     };
 
     dbConnect();
-    console.log(RefresToken);
-    const { id }: any = getDataFromToken(RefresToken);
-
-    const user = await User.findById({ _id: id });
-    if (user) {
-      await Interview.create(interview);
-    }
+    // console.log(RefresToken);
+    // const { id }: any = getDataFromToken(RefresToken);
+    console.log("thi ai tiwe", interview);
+    await Interview.create(interview);
 
     return NextResponse.json(success(200, "successful"));
   } catch (e) {

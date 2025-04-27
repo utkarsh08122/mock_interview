@@ -25,20 +25,14 @@ const userSchema = new mongoose.Schema(
       publicId: String,
       url: String,
     },
-    bio: {
-      type: String,
-      trim: true,
-      default: "",
-    },
     isVarifide: {
       type: Boolean,
       default: false,
     },
     varifytoken: String,
     varifyTokenExpiryy: Date,
-    followers: [{ type: mongoose.Types.ObjectId, ref: "users" }],
+    interview: [{ type: mongoose.Types.ObjectId, ref: "users" }],
     following: [{ type: mongoose.Types.ObjectId, ref: "users" }],
-    posts: [{ type: mongoose.Types.ObjectId, ref: "posts" }],
   },
   { timestamps: true }
 );
