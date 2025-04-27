@@ -1,11 +1,9 @@
 "use server";
-
 import { feedbackSchema } from "@/constants";
-import { google } from "@ai-sdk/google";
-import { generateObject } from "ai";
+import { createGoogleGenerativeAI, google } from "@ai-sdk/google";
 import { dbConnect } from "../dbConnect";
 import { Feedbacks } from "../model/feedback.Schema";
-import { GoogleGenAI } from "@google/genai";
+import { generateObject } from "ai";
 export const createFeedback = async (params: CreateFeedbackParams) => {
   const { interviewId, userId, transcript } = params;
   console.log("11111111111 ", interviewId, userId, transcript);
@@ -18,10 +16,6 @@ export const createFeedback = async (params: CreateFeedbackParams) => {
       .join("");
     console.log("222222222 2 ", formattedTranscript);
 
-
-    const genAi = new GoogleGenAI({
-      apiKey: "AIzaSyAv_h8RqautKbAlanUroWLllOm2wvk7UKU",
-    });
     const {
       object: {
         totalScore,
@@ -33,6 +27,7 @@ export const createFeedback = async (params: CreateFeedbackParams) => {
     } = await generateObject({
       model: google("gemini-1.5-flash-001", {
         structuredOutputs: false,
+        
       }),
       schema: feedbackSchema,
       prompt: `
@@ -47,7 +42,7 @@ export const createFeedback = async (params: CreateFeedbackParams) => {
       - **Cultural & Role Fit**: Alignment with company values and job role.
       - **Confidence & Clarity**: Confidence in responses, engagement, and clarity.
       `,
-      system:
+      system: 
         "You are a professional interviewer analyzing a mock interview. Your task is to evaluate the candidate based on structured categories",
     });
     console.log(
