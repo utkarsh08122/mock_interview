@@ -1,6 +1,10 @@
 import InterviewCard from "@/components/InterviewCard";
 import { Button } from "@/components/ui/button";
-import { getInterviewData, getLetestInterviewData } from "@/helper/Action";
+import {
+  getFeedbackByInterviewId,
+  getInterviewData,
+  getLetestInterviewData,
+} from "@/helper/Action";
 import { MyCookiesComponent } from "@/helper/Token";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,7 +16,6 @@ const page = async () => {
     await getInterviewData(id),
     await getLetestInterviewData(id),
   ]);
-
   const interviewLength = interview.length > 0;
   const letestInterviewLength = letestInterview.length > 0;
 
@@ -44,6 +47,7 @@ const page = async () => {
             interview.map((interveiw) => (
               <InterviewCard
                 key={interveiw._id}
+                companyName={interveiw.companyName}
                 role={interveiw.role}
                 interviewId={interveiw._id}
                 userId={interveiw.userId}
@@ -64,6 +68,7 @@ const page = async () => {
             letestInterview.map((interveiw) => (
               <InterviewCard
                 key={interveiw._id}
+                companyName={interveiw.companyName}
                 role={interveiw.role}
                 interviewId={interveiw.id}
                 userId={interveiw.userId}

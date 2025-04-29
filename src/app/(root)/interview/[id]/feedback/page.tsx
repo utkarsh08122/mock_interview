@@ -3,19 +3,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
-
+import { MyCookiesComponent } from "@/helper/Token";
+import { getFeedbackByInterviewId, getIntervewById } from "@/helper/Action";
 
 const Feedback = async ({ params }: RouteParams) => {
-  const { id } = await params;
-  const user = await getCurrentUser();
+  const interviewId = await params;
+  const { id }: any = await MyCookiesComponent();
 
-  const interview = await getInterviewById(id);
+  const interview = await getIntervewById(interviewId.id);
   if (!interview) redirect("/");
 
   const feedback = await getFeedbackByInterviewId({
-    interviewId: id,
-    userId: user?.id!,
+    interviewId: interviewId.id,
+    userId: id,
   });
+  console.log(feedback);
 
   return (
     <section className="section-feedback">

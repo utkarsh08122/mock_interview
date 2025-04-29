@@ -95,11 +95,6 @@ const Agent = ({
         transcript: messages,
         feedbackId,
       });
-      console.log(
-        "this si the success and feedback id in agent",
-        success,
-        feedbackId
-      );
 
       if (success && id) {
         router.push(`/interview/${interviewId}/feedback`);

@@ -17,9 +17,6 @@ export async function POST(req: NextRequest) {
     const genAi = new GoogleGenAI({
       apiKey:process.env.GOOGAL_GENERATIVE_AI_API_KEY,
     });
-    // const genAi = new GoogleGenAI({
-    //   apiKey: "AIzaSyAv_h8RqautKbAlanUroWLllOm2wvk7UKU",
-    // });
     const { text: questions }: any = await genAi.models.generateContent({
       model: "gemini-2.0-flash",
       contents: `Prepare questions for a job interview.
@@ -48,8 +45,7 @@ export async function POST(req: NextRequest) {
       companyName,
     };
 
-    dbConnect();
-    ;
+    dbConnect();;
     console.log("thi ai tiwe", interview);
     await Interview.create(interview);
 

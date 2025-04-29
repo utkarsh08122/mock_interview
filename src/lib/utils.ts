@@ -30,7 +30,8 @@ export const getTechLogos = async (techArray: string[]) => {
       url: `${techIconBaseURL}/${normalized}/${normalized}-original.svg`,
     };
   });
-
+ 
+  
   const results = await Promise.all(
     logoURLs.map(async ({ tech, url }) => ({
       tech,
@@ -40,6 +41,9 @@ export const getTechLogos = async (techArray: string[]) => {
 
   return results;
 };
+
+
+
 
 export const getRandomInterviewCover = () => {
   const randomIndex = Math.floor(Math.random() * interviewCovers.length);

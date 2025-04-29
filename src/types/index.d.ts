@@ -45,6 +45,7 @@ interface InterviewCardProps {
   type: string;
   techstack: string[];
   createdAt?: string;
+  companyName: string;
 }
 
 interface AgentProps {
@@ -54,7 +55,6 @@ interface AgentProps {
   feedbackId?: string;
   type: "generate" | "interview";
   questions?: string[];
-
 }
 
 interface RouteParams {
@@ -74,10 +74,11 @@ interface GetLatestInterviewsParams {
 
 interface SignInParams {
   email: string;
-  password: string;
+  idToken: string;
 }
 
 interface SignUpParams {
+  uid: string;
   name: string;
   email: string;
   password: string;
@@ -96,9 +97,4 @@ interface InterviewFormProps {
 
 interface TechIconProps {
   techStack: string[];
-}
-
-interface cookieProps {
-  name: string;
-  id: string;
 }

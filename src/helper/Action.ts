@@ -2,6 +2,7 @@ import { dbConnect } from "@/lib/dbConnect";
 import { Interview } from "@/lib/model/interview.Schema";
 import { MyCookiesComponent } from "./Token";
 import { User } from "@/lib/model/user.Schema";
+import { Feedbacks } from "@/lib/model/feedback.Schema";
 
 export const getInterviewData = async (id: any) => {
   dbConnect();
@@ -35,4 +36,20 @@ export const getUserData = async () => {
   return user;
 };
 
+export const getFeedbackByInterviewId = async (
+  params: GetFeedbackByInterviewIdParams
+): Promise<Feedback | null> => {
+  const { interviewId, userId } = params;
+
+  const feedback = await Feedbacks.find({
+    interviewId: interviewId,
+    userId: userId,
+  });
+  if (!feedback) {
+    return null;
+  }
+  console.log(feedback);
+
+  return feedback[0];
+};
 

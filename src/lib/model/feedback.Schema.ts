@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const feedbackSchema = new mongoose.Schema(
   {
     interviewId: { type: mongoose.Types.ObjectId, ref: "interviews" },
-    userId: [{ type: mongoose.Types.ObjectId, ref: "users" }],
+    userId: { type: mongoose.Types.ObjectId, ref: "users" },
     totalScore: {
       type: Number,
       required: true,

@@ -5,16 +5,21 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
 import DisplayTechIcons from "./DisplayTechIcons";
+import { getFeedbackByInterviewId } from "@/helper/Action";
 
-const InterviewCard = ({
+const InterviewCard = async ({
   interviewId,
   userId,
   role,
   type,
   techstack,
   createdAt,
+  companyName,
 }: InterviewCardProps) => {
-  const feedback = null as Feedback | null;
+  const feedback =
+    userId && interviewId
+      ? await getFeedbackByInterviewId({ interviewId, userId })
+      : null;
   const formattedDate = dayjs(
     feedback?.createdAt || createdAt || Date.now()
   ).format("MMM D,YYYY");
@@ -65,7 +70,7 @@ const InterviewCard = ({
         </div>
 
         <div className="flex flex-row justify-between">
-          <DisplayTechIcons  techStack={techstack} />
+          <DisplayTechIcons techStack={techstack} />
 
           <Button className="btn-primary">
             <Link
