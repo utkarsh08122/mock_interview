@@ -9,9 +9,9 @@ import { dbConnect } from "@/lib/dbConnect";
 import { User } from "@/lib/model/user.Schema";
 import { Interview } from "@/lib/model/interview.Schema";
 export async function POST(req: NextRequest) {
-  const { type, role, level, techstack, amount, userid, companyName } =
+  const { type, role, level, techstack, amount, companyName } =
     await req.json();
-  const RefresToken = req.cookies.get("RefresToken")?.value || "";
+  const { id }: any = MyCookiesComponent();
 
   try {
     const genAi = new GoogleGenAI({
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
       level,
       techstack: techstack.split(","),
       questions: JSON.parse(questions),
-      userId: userid,
+      userId: id,
       finalized: true,
       companyName,
     };
