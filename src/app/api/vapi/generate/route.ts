@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const genAi = new GoogleGenAI({
-      apiKey:process.env.GOOGAL_GENERATIVE_AI_API_KEY,
+      apiKey:"AIzaSyAif7vJNgUz_MTN9a3WQS7MaH4v0dlMd_A",
     });
     const { text: questions }: any = await genAi.models.generateContent({
       model: "gemini-2.0-flash",
